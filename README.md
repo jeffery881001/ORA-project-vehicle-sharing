@@ -164,10 +164,12 @@ For the second part, we fix the number of real-time orders and increase the numb
 
 ![image](https://github.com/jeffery881001/ORA-project-vehicle-sharing/blob/main/figures/sensitivity_preserved.png)
 
+## Major contribution
+In this project, the major contribution is the greedy algorithm in phase 2 and the insight drawn from the numerical study (note that phase 1 is an implementation practice of an existing model in the literature). Though the algorithm is simple, it can generate a plan for the company to respond to real-time orders as quickly as possible. Without the algorithm, the company either spends a lot of time finding an optimal solution, leading to the situation that the customer will wait for a long time, or generates a solution that is not too good. Furthermore, via numerical experiments and sensitivity analysis, we may see that even when there are thousands of orders, our method still provides a solution that is close enough to the optimal one. Practitioners can also determine whether our algorithm is an appropriate method based on the ratio of the number of preserved orders to that of real-time order.
+
 ## Conclusion
 In our project, we consider a vehicle-sharing company facing reserved orders and real-time orders. For reserved orders, we build a mathematical model based on the network graph to solve the problem optimally. For real-time orders, we propose an efficient greedy algorithm to approach it. The effectiveness and efficiency are demonstrated through numerical experiments.
 
 ## Reference 
-
 - Ma, J., Li, X., Zhou, F., Hao, W., 2017. Designing optimal autonomous vehicle sharing and reservation systems: A linear programming approach. Transp. Res. Part C:
 Emerg. Technol. 84, 124–141.
