@@ -7,6 +7,8 @@
   - [Phase two greedy algorithm](#phase-two-greedy-algorithm)
 - [Example](#example)
 - [Numerical Study](#numerical-study)
+- [Major contribution](#major-contribution)
+- [Limitation](#limitation)
 - [Conclusion](#conclusion)
 - [Reference](#reference)
 
@@ -101,7 +103,7 @@ Our objective is minimize the total cost of our system, and the objective functi
 
 - In constraint 1, we want to let our AV arrive before trip's pickup time given that the relocation time is deterministic. Therefore, our relocation time in $(i^+,j^-)$ must less than the delivery time of order j minus pickup time of order i
 - In constraint 2, we constraint link capacity. For each link, we only allow one AV use it because we only need to serve each demand once.
-- Constraint 3 and constraint are balance constraint, we use these two constraints to make sure that number of AVs we collect at the end is same as number of AVs we dispatch at the beginning
+- Constraint 3 and constraint 4 are balance constraint, we use these two constraints to make sure that number of AVs we collect at the end is same as number of AVs we dispatch at the beginning
 
 After solving above model, we can optimally determined number of AV we should dispatch and the trip chain for each AV based on reserved order.
 
@@ -115,20 +117,20 @@ After solving above model, we can optimally determined number of AV we should di
 
 In this section, we will present a simple example to facilitate a better understanding of our entire problem and methodology
 
-- In our example, we have five reserved orders, and the information is presented in the following figure. We then utilize the information from these five orders and execute the phase one model, resulting in the following optimal trip chains:
+In our example, we have five reserved orders, and the information is presented in the following figure. We then utilize the information from these five orders and execute the phase one model, resulting in the following optimal trip chains:
   - Car 1’s trip chain: start --- order 2 --- order 5 --- order 1 --- end
   - Car 2’s trip chain: start --- order 3 --- order 4 --- end
  
 ![image](https://github.com/jeffery881001/ORA-project-vehicle-sharing/blob/main/figures/example1.png)
 
  
-- Subsequently, in real-time, we receive order 6, and we identify two possible ways to insert this order:
+Subsequently, in real-time, we receive order 6, and we identify two possible ways to insert this order:
   - Car 1’s trip chain: start --- order 2 --- order 6 --- order 5 --- order 1 --- end
   - Car 2’s trip chain: start --- order 3 --- order 6 --- order 4 --- end
-- Finanly, we will choose the trip chain that minimally increases the cost
+
+Finanly, we will choose the trip chain that minimally increases the cost
 
 ![image](https://github.com/jeffery881001/ORA-project-vehicle-sharing/blob/main/figures/example2.png)
-
 
 
 ## Numerical Study
@@ -166,6 +168,16 @@ For the second part, we fix the number of real-time orders and increase the numb
 
 ## Major contribution
 In this project, the major contribution is the greedy algorithm in phase 2 and the insight drawn from the numerical study (note that phase 1 is an implementation practice of an existing model in the literature). Though the algorithm is simple, it can generate a plan for the company to respond to real-time orders as quickly as possible. Without the algorithm, the company either spends a lot of time finding an optimal solution, leading to the situation that the customer will wait for a long time, or generates a solution that is not too good. Furthermore, via numerical experiments and sensitivity analysis, we may see that even when there are thousands of orders, our method still provides a solution that is close enough to the optimal one. Practitioners can also determine whether our algorithm is an appropriate method based on the ratio of the number of preserved orders to that of real-time order.
+
+## Limitation
+
+- Our travel time is deterministic, but in real world, there might be congestion
+- During the service or relocation, the AV may need to go to a refueling station for refueling
+
+## Future work
+
+- Consider the real-time order as stochastic, and leverage the real-time order location distribution or pickup time distribution to adjust our phase one optimization and obtain a more optimal trip chain.
+- Use real traffic data to get more information about congestion or refueling to make the model more robust
 
 ## Conclusion
 In our project, we consider a vehicle-sharing company facing reserved orders and real-time orders. For reserved orders, we build a mathematical model based on the network graph to solve the problem optimally. For real-time orders, we propose an efficient greedy algorithm to approach it. The effectiveness and efficiency are demonstrated through numerical experiments.
