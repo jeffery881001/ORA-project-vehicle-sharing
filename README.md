@@ -30,7 +30,7 @@ Therefore, We divide our relocation plan problem into two phases to simplify the
 
 As depicted in the figure below, a reserved order is one received before dispatching vehicles, while a real-time order is received after dispatching the vehicles.
 
-![image](https://github.com/jeffery881001/ORA-project-vehicle-sharing/blob/main/figures/order.png)
+![image](https://github.com/jeffery881001/ORA-project-vehicle-sharing/blob/main/figures/order.jpg)
 
 In phase one, we handle reserved orders(orders received before dispatching) using operations research methods for optimization.
 In phase two, we address real-time orders(orders received after dispatching) using a greedy algorithm.
