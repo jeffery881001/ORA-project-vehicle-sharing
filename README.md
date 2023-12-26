@@ -11,15 +11,27 @@
 - [Reference](#reference)
 
 ## Background and Problem Statement
-In this project, we aim to establish an scheduling system for an autonomous vehicle(refered as AV) sharing company. 
+In this project, our objective is to establish a scheduling system for an autonomous vehicle (referred as AV) sharing company. 
 The system will receive orders from customers. And in each order, we will receive information regarding the pickup location, delivery location, pickup time and delivery time.
 Based on these information, our system will optimally determine the number of AVs we should dispatched and the trip chain for each AV.
+
+The entire process is illustrated in the figure below. 
+Initially, we acquire orders from our customers. 
+Then, utilizing our system, we determine that two AVs are required to fulfill these orders.
+
+The first AV is assigned to serve the third order and then returns to the sink node. 
+Meanwhile, the second AV begins by serving the first order, followed by the second order, before ultimately returning to the sink node.
+
+![image](https://github.com/jeffery881001/ORA-project-vehicle-sharing/blob/main/figures/process.png)
 
 In our system, each AV is dispatched from the depot at the beginning of the day and returns to the depot at the end of the day for maintenance. 
 We may receive orders both before and after dispatching the vehicles.
 Therefore, We divide our relocation plan problem into two phases to simplify the problem-solving process.
 
-A reserved order is one received before dispatching vehicles, while a real-time order is received after dispatching the vehicles.
+As depicted in the figure below, a reserved order is one received before dispatching vehicles, while a real-time order is received after dispatching the vehicles.
+
+![image](https://github.com/jeffery881001/ORA-project-vehicle-sharing/blob/main/figures/order.png)
+
 In phase one, we handle reserved orders(orders received before dispatching) using operations research methods for optimization.
 In phase two, we address real-time orders(orders received after dispatching) using a greedy algorithm.
 The reason we don't rerun the optimization in the second phase is that, in real-time scenarios, customers want to know immediately whether we can dispatch an AV to pick them up. 
@@ -32,7 +44,7 @@ In this section, we will introduce our model using in phase one and phase two
 
 ### Phase one model
 
-In phase model, we use the model in ##### 引用 to find the optimal trip chain based on reserved input
+In phase model, we use the model in Jiaqi et al(2017) to find the optimal trip chain based on reserved input
 
 #### Input data
 Our input data comes from received orders, providing information about pickup location, delivery location, pickup time, and delivery time.
@@ -104,8 +116,20 @@ After solving above model, we can optimally determined number of AV we should di
 In this section, we will present a simple example to facilitate a better understanding of our entire problem and methodology
 
 - In our example, we have five reserved orders, and the information is presented in the following figure. We then utilize the information from these five orders and execute the phase one model, resulting in the following optimal trip chains:
-  - Car 1’s trip chain: start --- order 2 --- order 5 --- order 1 --- end.
+  - Car 1’s trip chain: start --- order 2 --- order 5 --- order 1 --- end
   - Car 2’s trip chain: start --- order 3 --- order 4 --- end
+ 
+![image](https://github.com/jeffery881001/ORA-project-vehicle-sharing/blob/main/figures/example1.png)
+
+ 
+- Subsequently, in real-time, we receive order 6, and we identify two possible ways to insert this order:
+  - Car 1’s trip chain: start --- order 2 --- order 6 --- order 5 --- order 1 --- end
+  - Car 2’s trip chain: start --- order 3 --- order 6 --- order 4 --- end
+- Finanly, we will choose the trip chain that minimally increases the cost
+
+![image](https://github.com/jeffery881001/ORA-project-vehicle-sharing/blob/main/figures/example2.png)
+
+
 
 ## Numerical Study
 In this section, we use some test data to show the effectiveness and efficiency of the mathematical program for phase 1 and our greedy algorithm for phase 2.
@@ -142,3 +166,8 @@ For the second part, we fix the number of real-time orders and increase the numb
 
 ## Conclusion
 In our project, we consider a vehicle-sharing company facing reserved orders and real-time orders. For reserved orders, we build a mathematical model based on the network graph to solve the problem optimally. For real-time orders, we propose an efficient greedy algorithm to approach it. The effectiveness and efficiency are demonstrated through numerical experiments.
+
+## Reference 
+
+- Ma, J., Li, X., Zhou, F., Hao, W., 2017. Designing optimal autonomous vehicle sharing and reservation systems: A linear programming approach. Transp. Res. Part C:
+Emerg. Technol. 84, 124–141.
