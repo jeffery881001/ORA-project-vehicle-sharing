@@ -44,7 +44,7 @@ In the following section, we will introduce how we find the optimal trip chain i
 
 In this section, we will introduce our model using in phase one and phase two
 
-### Phase one model
+### Phase one: optimization model
 
 In phase model, we use the model in Jiaqi et al(2017) to find the optimal trip chain based on reserved input
 
@@ -107,7 +107,7 @@ Our objective is minimize the total cost of our system, and the objective functi
 
 After solving above model, we can optimally determined number of AV we should dispatch and the trip chain for each AV based on reserved order.
 
-### Phase two greedy algorithm
+### Phase two: greedy algorithm
 
 - In phase two, as we deal with real-time orders, efficiency becomes crucial. Therefore, we employ a greedy algorithm to address the problem. While this approach may not yield an optimal trip chain, it allows us to quickly obtain a suboptimal trip chain.
 - Our greedy algorithm is straightforward: we identify all feasible solutions based on the current trip chain and then insert the new order into the trip chain in a way that minimally increases the cost
